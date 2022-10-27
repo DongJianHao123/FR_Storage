@@ -1,0 +1,65 @@
+{
+    "name": "server",
+    "version": "0.0.1",
+    "description": "cli 是独立运行的 cli app 同时作为库提供给 electron 调用",
+    "type": "module",
+    "sourceType": "module",
+    "bin": "dist/server.cjs",
+    "pkg": {
+        "assets": [
+            "public/**/*",
+            "views/**/*",
+            "node_modules/**/*"
+        ],
+        "scripts": "dist/**/*.js",
+        "targets": [
+            "node-v16.16.0-win-x64"
+        ]
+    },
+    "files": [
+        "dist",
+        "types"
+    ],
+    "main": "./dist/server.cjs",
+    "module": "./dist/server.cjs",
+    "exports": {
+        ".": {
+            "import": "./dist/server.js",
+            "require": "./dist/server.cjs"
+        }
+    },
+    "types": "./types/index.d.ts",
+    "prisma": {
+        "schema": "prisma/schema.prisma"
+    },
+    "scripts": {
+        "start": "cross-env NODE_ENV=production node src/main.js start",
+        "dev": "cross-env NODE_ENV=development node src/main.js start",
+        "build": "vite build",
+        "postinstall": "npx prisma migrate dev --name init",
+        "prestart": "npx prisma generate"
+    },
+    "devDependencies": {
+        "@types/node": "^18.6.2",
+        "@types/ws": "^8.5.3",
+        "cross-env": "^7.0.3",
+        "vite": "^3.0.3",
+        "vitest": "^0.19.1"
+    },
+    "dependencies": {
+        "@prisma/client": "^4.2.1",
+        "chokidar": "^3.5.3",
+        "express": "^4.18.1",
+        "node-disk-info": "^1.3.0",
+        "os-utils": "^0.0.14",
+        "prisma": "^4.2.1",
+        "queue": "^6.0.2"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "directories": {
+        "test": "test"
+    },
+    "__npminstall_done": false
+}

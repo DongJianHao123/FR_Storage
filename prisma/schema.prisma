@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model info_protein {
+  id                                   BigInt    @id @default(autoincrement())
+  time                                 DateTime?
+  mass_spectrometer                    String? //质谱仪
+  score                                Int? //得分  
+  median_of_chromatographic_peak_width Float? //色谱峰宽中值
+  charge_1                             Int? //电荷1
+  charge_2                             Int?
+  charge_3                             Int?
+  charge_4                             Int?
+  first_order_spectrogram              Float? //一级谱图强度
+  first_order_spectrogram_by_log       Float? //一级谱图强度取（取log）
+  second_order_spectrogram             Float? //二级谱图强度
+  second_order_spectrogram_by_log      Float? //二级谱图强度取（取log）
+  collect_num                          Int? //采集数量
+  collect_speed                        Float? //采集数量
+}
+
+model info_sirt {
+  id             BigInt    @id @default(autoincrement())
+  time           DateTime?
+  interior_label String? //内部标识
+  Round          Int? //轮次标识
+  retention_time BigInt? //保留时间
+  strength       Int? //强度
+}
+
+model signinWrap {
+  id       BigInt    @id @default(autoincrement())
+  username String?
+  sign_ip  String?
+  sign_at  DateTime?
+}
+
+model performance_pc {
+  id                BigInt    @id @default(autoincrement())
+  ip                String?
+  disk              Int?
+  data_time         DateTime?
+  network_frequency Float?
+  cpu_usage         Float?
+  memory_usage      Float?
+  disk_usage        Float?
+  create_time       DateTime?
+  update_time       DateTime?
+  type              String?
+}
